@@ -1,10 +1,11 @@
-name: Contribution snake
+name: Contribution count
 
-# Redraws the snake that eats the contribution graph and the contribution count, once a day and on
-# every push to main. The SVGs are published to the "output" branch, which the README reads.
+# Writes the contribution count every hour and on every push to main: contributions.svg for the
+# README and contributions.json for the site (gabrielrcl.dev reads it from raw.githubusercontent.com).
+# Both are published to the "output" branch.
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "17 * * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -13,11 +14,10 @@ permissions:
   contents: write
 
 jobs:
-  snake:
+  count:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      # Runs before snk: snk writes dist/ as root, so a later step could not add files to it.
       # The count is the one the profile graph shows (private contributions included, since the
       # profile is set to show them).
       - name: Contribution count
@@ -28,26 +28,24 @@ jobs:
           mkdir -p dist
           total=$(gh api graphql -f query='query($login: String!) { user(login: $login) { contributionsCollection { contributionCalendar { totalContributions } } } }' -f login="$LOGIN" --jq '.data.user.contributionsCollection.contributionCalendar.totalContributions')
           python3 - "$total" <<'PY'
+          import datetime
+          import json
           import sys
-          n = f"{int(sys.argv[1]):,}"
+          total = int(sys.argv[1])
+          n = f"{total:,}"
           font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
           svg = (
               '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="44" role="img" aria-label="' + n + ' contributions in the last year">'
               '<text x="0" y="31" font-family="' + font + '" font-size="26">'
               '<tspan fill="#F87934" font-weight="800">' + n + '</tspan>'
-              '<tspan fill="#8B949E" font-size="18" dx="10">contributions in the last year · updated daily</tspan>'
+              '<tspan fill="#8B949E" font-size="18" dx="10">contributions in the last year · updated hourly</tspan>'
               '</text></svg>'
           )
           open("dist/contributions.svg", "w").write(svg)
+          updated = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          json.dump({"total": total, "updated": updated}, open("dist/contributions.json", "w"))
           print("contributions:", n)
           PY
-
-      - uses: Platane/snk@v3
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/github-snake.svg?color_snake=#f87934
-            dist/github-snake-dark.svg?palette=github-dark&color_snake=#f87934
 
       - uses: crazy-max/ghaction-github-pages@v4
         with:
