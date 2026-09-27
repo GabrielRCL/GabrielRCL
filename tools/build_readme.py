@@ -1,4 +1,5 @@
 """Profile README for GabrielRCL/GabrielRCL: banner, diff status block, sections, badge stack, snake."""
+import base64
 import os
 from urllib.parse import quote
 
@@ -11,12 +12,17 @@ def lum(hexcolor):
     return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
 
 
+BOLT = ("data:image/svg+xml;base64," + base64.b64encode(
+    b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">'
+    b'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>').decode())
+
+
 def badge(label, color, logo=None):
     text = quote(label.replace("-", "--").replace("_", "__"), safe="")
     fg = "black" if lum(color) > 0.45 else "white"
     url = f"https://img.shields.io/badge/{text}-{color}?style=for-the-badge"
     if logo:
-        url += f"&logo={logo}&logoColor={fg}"
+        url += f"&logo={quote(logo, safe='')}&logoColor={fg}" if logo.startswith("data:") else f"&logo={logo}&logoColor={fg}"
     return f'<img src="{url}" alt="{label}">'
 
 
@@ -54,7 +60,8 @@ TIERS = [
     ]),
 ]
 
-SNAKE = "https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/github-snake"
+OUTPUT = "https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output"
+SNAKE = OUTPUT + "/github-snake"
 
 
 def main():
@@ -100,6 +107,8 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 {chr(10).join(stack)}
 ### Contributions
 
+<img src="{OUTPUT}/contributions.svg" alt="Contributions in the last year, updated daily">
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="{SNAKE}-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="{SNAKE}.svg">
@@ -110,7 +119,12 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 
 {contact}
 
-<sub>Bitcoin donations (on-chain): `bc1qlwrptn0jgnexylsycpecpqrekl7zert5hsrxv9`</sub>
+{badge("Buy me a coffee", "FFDD00", "buymeacoffee")}
+
+<table>
+  <tr><td>{badge("Bitcoin on-chain", "F7931A", "bitcoin")}</td><td><code>bc1qlwrptn0jgnexylsycpecpqrekl7zert5hsrxv9</code></td></tr>
+  <tr><td>{badge("Lightning", "7B3FE4", BOLT)}</td><td><code>satoshi@gabrielrcl.dev</code></td></tr>
+</table>
 """
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(readme)
