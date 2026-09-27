@@ -112,21 +112,22 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 
 ### Contributions
 
-<img src="https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/contributions.svg" alt="Contributions in the last year, updated daily">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/github-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/github-snake.svg">
-  <img alt="A snake eating my contribution graph" src="https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/github-snake.svg">
-</picture>
+<img src="https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/contributions.svg" alt="Contributions in the last year, updated every hour">
 
 ### Contact
 
-<a href="https://gabrielrcl.github.io"><img src="https://img.shields.io/badge/gabrielrcl.github.io-F87934?style=for-the-badge&logo=googlechrome&logoColor=white" alt="gabrielrcl.github.io"></a> <a href="https://www.linkedin.com/in/gabrielrcl777/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge" alt="LinkedIn"></a> <a href="mailto:gabrielrcl@protonmail.com"><img src="https://img.shields.io/badge/gabrielrcl%40protonmail.com-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=white" alt="gabrielrcl@protonmail.com"></a>
+<a href="https://gabrielrcl.dev"><img src="https://img.shields.io/badge/gabrielrcl.dev-F87934?style=for-the-badge&logo=googlechrome&logoColor=white" alt="gabrielrcl.dev"></a> <a href="https://www.linkedin.com/in/gabrielrcl777/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge" alt="LinkedIn"></a> <a href="mailto:gabrielrcl@protonmail.com"><img src="https://img.shields.io/badge/gabrielrcl%40protonmail.com-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=white" alt="gabrielrcl@protonmail.com"></a>
 
-<img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black" alt="Buy me a coffee">
+### <img src="assets/icons/coffee.svg" width="28" height="28" alt=""> Buy me a coffee
 
-<table>
-  <tr><td><img src="https://img.shields.io/badge/Bitcoin%20on--chain-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white" alt="Bitcoin on-chain"></td><td><code>bc1qlwrptn0jgnexylsycpecpqrekl7zert5hsrxv9</code></td></tr>
-  <tr><td><img src="https://img.shields.io/badge/Lightning-7B3FE4?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMyAyIDQgMTRoN2wtMSA4IDktMTJoLTd6Ii8%2BPC9zdmc%2B&logoColor=white" alt="Lightning"></td><td><code>satoshi@gabrielrcl.dev</code></td></tr>
-</table>
+<img src="assets/icons/bitcoin.svg" width="16" height="16" alt=""> **Bitcoin on-chain**
+
+```text
+bc1qlwrptn0jgnexylsycpecpqrekl7zert5hsrxv9
+```
+
+<img src="assets/icons/lightning.svg" width="16" height="16" alt=""> **Lightning**
+
+```text
+satoshi@gabrielrcl.dev
+```

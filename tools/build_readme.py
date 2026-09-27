@@ -1,5 +1,4 @@
-"""Profile README for GabrielRCL/GabrielRCL: banner, diff status block, sections, badge stack, snake."""
-import base64
+"""Profile README for GabrielRCL/GabrielRCL: banner, diff status block, sections, badge stack, contact."""
 import os
 from urllib.parse import quote
 
@@ -10,11 +9,6 @@ def lum(hexcolor):
     r, g, b = (int(hexcolor[i:i + 2], 16) / 255 for i in (0, 2, 4))
     f = lambda c: c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
     return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
-
-
-BOLT = ("data:image/svg+xml;base64," + base64.b64encode(
-    b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">'
-    b'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>').decode())
 
 
 def badge(label, color, logo=None):
@@ -61,7 +55,6 @@ TIERS = [
 ]
 
 OUTPUT = "https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output"
-SNAKE = OUTPUT + "/github-snake"
 
 
 def main():
@@ -69,7 +62,7 @@ def main():
     for title, items in TIERS:
         stack.append(f"**{title}**\n\n<p>\n" + "\n".join(badge(*it) for it in items) + "\n</p>\n")
     contact = " ".join([
-        f'<a href="https://gabrielrcl.github.io">{badge("gabrielrcl.github.io", "F87934", "googlechrome")}</a>',
+        f'<a href="https://gabrielrcl.dev">{badge("gabrielrcl.dev", "F87934", "googlechrome")}</a>',
         f'<a href="https://www.linkedin.com/in/gabrielrcl777/">{badge("LinkedIn", "0A66C2")}</a>',
         f'<a href="mailto:gabrielrcl@protonmail.com">{badge("gabrielrcl@protonmail.com", "6D4AFF", "protonmail")}</a>',
     ])
@@ -107,24 +100,25 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 {chr(10).join(stack)}
 ### Contributions
 
-<img src="{OUTPUT}/contributions.svg" alt="Contributions in the last year, updated daily">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="{SNAKE}-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="{SNAKE}.svg">
-  <img alt="A snake eating my contribution graph" src="{SNAKE}.svg">
-</picture>
+<img src="{OUTPUT}/contributions.svg" alt="Contributions in the last year, updated every hour">
 
 ### Contact
 
 {contact}
 
-{badge("Buy me a coffee", "FFDD00", "buymeacoffee")}
+### <img src="assets/icons/coffee.svg" width="28" height="28" alt=""> Buy me a coffee
 
-<table>
-  <tr><td>{badge("Bitcoin on-chain", "F7931A", "bitcoin")}</td><td><code>bc1qlwrptn0jgnexylsycpecpqrekl7zert5hsrxv9</code></td></tr>
-  <tr><td>{badge("Lightning", "7B3FE4", BOLT)}</td><td><code>satoshi@gabrielrcl.dev</code></td></tr>
-</table>
+<img src="assets/icons/bitcoin.svg" width="16" height="16" alt=""> **Bitcoin on-chain**
+
+```text
+bc1qlwrptn0jgnexylsycpecpqrekl7zert5hsrxv9
+```
+
+<img src="assets/icons/lightning.svg" width="16" height="16" alt=""> **Lightning**
+
+```text
+satoshi@gabrielrcl.dev
+```
 """
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(readme)

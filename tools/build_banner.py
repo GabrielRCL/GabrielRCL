@@ -17,10 +17,12 @@ W, H = 1280, 320
 # (phrase, [(icon file, width, height)])
 PHRASES = [
     ("Odoo developer · ERP integrations", [("odoo.png", 30, 30)]),
-    ("ITSM · WhatsApp · MCP · NFS-e · banks", [("nexview.png", 44, 21), ("whatsapp.svg", 28, 28), ("mcp.svg", 28, 28), ("nfse.svg", 28, 28), ("banks.svg", 28, 28)]),
+    ("ITSM · WhatsApp · MCP · NFS-e · banks", [("nexview.png", 44, 21), ("whatsapp.svg", 28, 28), ("claude.svg", 28, 28), ("nfse.png", 52, 20), ("banks.png", 30, 30)]),
     ("Founder of Tibia Macros (2020–2026)", [("tibiamacros.png", 38, 32)]),
     ("Computer Engineering at Multivix", [("multivix.png", 30, 30)]),
 ]
+# Logos that need a white plate: the NFS-e wordmark is dark green and blue on the navy banner.
+PLATED = {"nfse.png"}
 SLOT = 4.6                          # seconds per phrase
 CYCLE = SLOT * len(PHRASES)
 TYPE, HOLD_END, DEL = 1.3, 3.8, 0.45  # typing time, hold until, deleting time (inside a slot)
@@ -84,27 +86,34 @@ def main():
             uri.setdefault(icon, data_uri(icon))
             a = done + 0.1 + 0.09 * j
             y = Y0 - 8 - h / 2
-            effects.append(
-                f'<image href="{uri[icon]}" x="{x:.1f}" y="{y:.1f}" width="{w}" height="{h}" opacity="0">'
-                f'<animate attributeName="opacity" dur="{CYCLE}s" repeatCount="indefinite" keyTimes="{kt(0, a, a + 0.3, hold, hold + 0.15, CYCLE)}" values="0;0;1;1;0;0"/>'
-                f'<animate attributeName="y" dur="{CYCLE}s" repeatCount="indefinite" keyTimes="{kt(0, a, a + 0.3, CYCLE)}" values="{y + 8:.1f};{y + 8:.1f};{y:.1f};{y:.1f}"/>'
-                f'</image>')
-            x += w + 8
+            fade = f'<animate attributeName="opacity" dur="{CYCLE}s" repeatCount="indefinite" keyTimes="{kt(0, a, a + 0.3, hold, hold + 0.15, CYCLE)}" values="0;0;1;1;0;0"/>'
+
+            def rise(top):
+                return (f'<animate attributeName="y" dur="{CYCLE}s" repeatCount="indefinite" keyTimes="{kt(0, a, a + 0.3, CYCLE)}" '
+                        f'values="{top + 8:.1f};{top + 8:.1f};{top:.1f};{top:.1f}"/>')
+            if icon in PLATED:
+                effects.append(f'<rect x="{x - 4:.1f}" y="{y - 4:.1f}" width="{w + 8}" height="{h + 8}" rx="4" fill="#FFFFFF" opacity="0">{fade}{rise(y - 4)}</rect>')
+            effects.append(f'<image href="{uri[icon]}" x="{x:.1f}" y="{y:.1f}" width="{w}" height="{h}" opacity="0">{fade}{rise(y)}</image>')
+            x += w + (16 if icon in PLATED else 8)
     ck, cv = discrete(cursor_pts.items(), lambda c: f"{X0 + c * CW + 2:.1f}")
 
-    nodes = [("NexView ITSM", "nexview.png", 26, 12.5), ("Zabbix → CMDB", "zabbix.png", 18, 18), ("WhatsApp", "whatsapp.svg", 18, 18),
-             ("MCP", "mcp.svg", 18, 18), ("NFS-e", "nfse.svg", 18, 18), ("Banks", "banks.svg", 18, 18)]
+    nodes = [("NexView ITSM", "nexview.png", 26, 12.9), ("Zabbix → CMDB", "zabbix.png", 18, 18),
+             ("WhatsApp", "whatsapp.svg", 18, 18), ("Claude · MCP", "claude.svg", 20, 20),
+             ("NFS-e", "nfse.png", 26, 10), ("Banks", "banks.png", 22, 22)]
     wire_x, top, gap = 968, 62, 40
     first = top + 36
     wire_end = first + (len(nodes) - 1) * gap
     node_svg = []
     for k, (label, icon, iw, ih) in enumerate(nodes):
+        plate = icon in PLATED
         uri.setdefault(icon, data_uri(icon))
         y = first + k * gap
+        ix = wire_x + 38 + (26 - iw) / 2
         node_svg.append(
             f'<line x1="{wire_x}" y1="{y}" x2="{wire_x + 26}" y2="{y}" stroke="#1B4FD8" stroke-width="3"/>'
             f'<rect x="{wire_x + 26}" y="{y - 15}" width="206" height="30" rx="8" fill="#0C1633" stroke="#1C2A4F"/>'
-            f'<image href="{uri[icon]}" x="{wire_x + 38 + (26 - iw) / 2:.1f}" y="{y - ih / 2:.1f}" width="{iw}" height="{ih}"/>'
+            + (f'<rect x="{ix - 3:.1f}" y="{y - ih / 2 - 3:.1f}" width="{iw + 6}" height="{ih + 6}" rx="3" fill="#FFFFFF"/>' if plate else '')
+            + f'<image href="{uri[icon]}" x="{ix:.1f}" y="{y - ih / 2:.1f}" width="{iw}" height="{ih}"/>'
             f'<text x="{wire_x + 72}" y="{y + 5}" class="node">{html.escape(label)}</text>')
     uri.setdefault("odoo.png", data_uri("odoo.png"))
 
