@@ -54,8 +54,6 @@ TIERS = [
     ]),
 ]
 
-OUTPUT = "https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output"
-
 
 def main():
     stack = []
@@ -98,10 +96,6 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 ### Stack
 
 {chr(10).join(stack)}
-### Contributions
-
-<img src="{OUTPUT}/contributions.svg" alt="Contributions in the last year, updated every hour">
-
 ### Contact
 
 Liked one of these projects? Let's talk.

@@ -110,10 +110,6 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge" alt="AWS">
 </p>
 
-### Contributions
-
-<img src="https://raw.githubusercontent.com/GabrielRCL/GabrielRCL/output/contributions.svg" alt="Contributions in the last year, updated every hour">
-
 ### Contact
 
 Liked one of these projects? Let's talk.

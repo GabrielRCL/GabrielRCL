@@ -1,8 +1,7 @@
 name: Contribution count
 
-# Writes the contribution count every hour and on every push to main: contributions.svg for the
-# README and contributions.json for the site (gabrielrcl.dev reads it from raw.githubusercontent.com).
-# Both are published to the "output" branch.
+# Writes the contribution count every hour and on every push to main: contributions.json for the
+# site (gabrielrcl.dev reads it from raw.githubusercontent.com), published to the "output" branch.
 on:
   schedule:
     - cron: "17 * * * *"
@@ -32,19 +31,9 @@ jobs:
           import json
           import sys
           total = int(sys.argv[1])
-          n = f"{total:,}"
-          font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-          svg = (
-              '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="44" role="img" aria-label="' + n + ' contributions in the last year">'
-              '<text x="0" y="31" font-family="' + font + '" font-size="26">'
-              '<tspan fill="#F87934" font-weight="800">' + n + '</tspan>'
-              '<tspan fill="#8B949E" font-size="18" dx="10">contributions in the last year · updated hourly</tspan>'
-              '</text></svg>'
-          )
-          open("dist/contributions.svg", "w").write(svg)
           updated = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
           json.dump({"total": total, "updated": updated}, open("dist/contributions.json", "w"))
-          print("contributions:", n)
+          print("contributions:", total)
           PY
 
       - uses: crazy-max/ghaction-github-pages@v4
