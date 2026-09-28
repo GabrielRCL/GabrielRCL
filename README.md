@@ -116,6 +116,8 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 
 ### Contact
 
+Liked one of these projects? Let's talk.
+
 <a href="https://gabrielrcl.dev"><img src="https://img.shields.io/badge/gabrielrcl.dev-F87934?style=for-the-badge&logo=googlechrome&logoColor=white" alt="gabrielrcl.dev"></a> <a href="https://www.linkedin.com/in/gabrielrcl777/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge" alt="LinkedIn"></a> <a href="mailto:gabrielrcl@protonmail.com"><img src="https://img.shields.io/badge/gabrielrcl%40protonmail.com-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=white" alt="gabrielrcl@protonmail.com"></a>
 
 ### <img src="assets/icons/coffee.svg" width="28" height="28" alt=""> Buy me a coffee

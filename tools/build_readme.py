@@ -104,6 +104,8 @@ I have hosted and run Tibia (OpenTibia) and Minecraft servers since 2017, and I 
 
 ### Contact
 
+Liked one of these projects? Let's talk.
+
 {contact}
 
 ### <img src="assets/icons/coffee.svg" width="28" height="28" alt=""> Buy me a coffee
